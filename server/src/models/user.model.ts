@@ -1,5 +1,5 @@
 import {Entity, model, property} from '@loopback/repository';
-
+import { RoleEnum } from '../constant/model.enum';
 @model({settings: {strict: false}})
 export class User extends Entity {
   @property({
@@ -13,36 +13,39 @@ export class User extends Entity {
     type: 'string',
     required: true,
   })
-  Fullname: string;
+  fullname: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  Email: string;
+  email: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  Telephone_number: string;
+  password: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  Username: string;
+  phoneNumber: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  Role: string;
+  username: string;
 
-  // Define well-known properties here
-
-  // Indexer property to allow additional data
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @property({
+    type: 'string',
+    jsonSchema: {
+      enum: Object.values(RoleEnum)
+    }
+  })
+  role?: RoleEnum;
   [prop: string]: any;
 
   constructor(data?: Partial<User>) {
@@ -51,7 +54,7 @@ export class User extends Entity {
 }
 
 export interface UserRelations {
-  // describe navigational properties here
+
 }
 
 export type UserWithRelations = User & UserRelations;
