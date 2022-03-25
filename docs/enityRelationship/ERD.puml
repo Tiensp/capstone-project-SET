@@ -1,0 +1,66 @@
+@startuml Application use cases diagram
+skinparam actorStyle awesome
+
+entity Todo{
+  -id: ObjectID <generated>
+  --
+  ~projectId: ObjectID
+  ~assignedTo: ObjectID
+  ~createdBy: ObjectID
+  ~parentId: ObjectID
+  --
+  *title: string
+  description: string
+  priority: "low" |  "medium" | "high" | "highest"
+  status: "todo" | "in progress" | "coding done"
+  isFixing: boolean
+  isDone: boolean
+  createdAt: Date
+  updatedAt: Date
+  isDeleted: boolean
+}
+
+entity Project {
+  -id: ObjectID <generated>
+  --
+  ~createdBy: ObjectID
+  --
+  *title: string,
+  description: string,
+  isActive: boolean,
+  createAt: Date,
+  updatedAt: Date,
+  isDeleted: boolean
+}
+
+entity User {
+  -id: ObjectID <generated>
+  --
+  name: string
+  *email: string
+  *password: string
+  phoneNumber: string
+  isActive: boolean
+  createdAt: Date
+  updatedAt: Date
+  isDeleted: boolean
+  role: "user" | "admin"
+}
+
+entity ProjectUser {
+  -id: ObjectID
+  --
+  ~projectId: ObjectID
+  ~userId: ObjectID
+  --
+  projectRole: "developer" | "manager"
+  createdAt: Date,
+}
+
+Project ||--o{ Todo
+Project ||--o{ ProjectUser
+User ||--o{ ProjectUser
+User ||--o{ Todo
+Todo ||--o{ Todo
+
+@enduml
