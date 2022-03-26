@@ -1,66 +1,79 @@
 @startuml Application use cases diagram
 skinparam actorStyle awesome
 
-entity Todo{
+entity Cloud{
   -id: ObjectID <generated>
   --
-  ~projectId: ObjectID
-  ~assignedTo: ObjectID
-  ~createdBy: ObjectID
-  ~parentId: ObjectID
+  ~userId: ObjectID
   --
-  *title: string
+  *name: string
   description: string
-  priority: "low" |  "medium" | "high" | "highest"
-  status: "todo" | "in progress" | "coding done"
-  isFixing: boolean
-  isDone: boolean
-  createdAt: Date
-  updatedAt: Date
-  isDeleted: boolean
-}
-
-entity Project {
-  -id: ObjectID <generated>
-  --
-  ~createdBy: ObjectID
-  --
-  *title: string,
-  description: string,
-  isActive: boolean,
-  createAt: Date,
-  updatedAt: Date,
-  isDeleted: boolean
-}
-
-entity User {
-  -id: ObjectID <generated>
-  --
-  name: string
-  *email: string
-  *password: string
-  phoneNumber: string
+  size: number
+  percent_memory_used: number
+  status: "Good" | "Quite Good" | "Normal" | "Quite Bad" | "Dead"
+  hasData: boolean
+  security: string,
+  firewall: string,
+  securityStatus: "Good" | "Quite Good" | "Normal" | "Quite Bad" | "None"
   isActive: boolean
   createdAt: Date
   updatedAt: Date
   isDeleted: boolean
-  role: "user" | "admin"
 }
 
-entity ProjectUser {
-  -id: ObjectID
+entity Container{
+  -id: ObjectID <generated>
   --
-  ~projectId: ObjectID
-  ~userId: ObjectID
+  ~cloudId: ObjectID
+  ~imageId: ObjectID
   --
-  projectRole: "developer" | "manager"
-  createdAt: Date,
+  *name: string
+  description: string
+  port: string
+  isActive: boolean
+  createdAt: Date
+  updatedAt: Date
+  isDeleted: boolean
 }
 
-Project ||--o{ Todo
-Project ||--o{ ProjectUser
-User ||--o{ ProjectUser
-User ||--o{ Todo
-Todo ||--o{ Todo
+entity Image{
+  -id: ObjectID <generated>
+  --
+  ~containerId:ObjectID
+  --
+  *name: string
+  description: string
+  port: string
+  size: number
+  percent_cloudMemory_used: number
+  isActive: boolean
+  createdAt: Date
+  updatedAt: Date
+  isDeleted: boolean
+}
+
+
+entity User {
+  -id: ObjectID <generated>
+  --
+  *email: string
+  *password: string
+  fullName: string
+  userName: string
+  phoneNumber: string
+  payment: number
+  isActive: boolean
+  createdAt: Date
+  updatedAt: Date
+  isDeleted: boolean
+  role: "user" | "member" | "VIP" | "admin"
+}
+
+Cloud ||-o{ Container
+Container ||--|| Image
+User ||-o{ Cloud
+
+
+
 
 @enduml
