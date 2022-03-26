@@ -31,6 +31,7 @@ entity Container{
   description: string
   port: string
   isActive: boolean
+  isDeleted: boolean
   createdAt: Date
   updatedAt: Date
   isDeleted: boolean
@@ -43,7 +44,6 @@ entity Image{
   --
   *name: string
   description: string
-  port: string
   size: number
   percent_cloudMemory_used: number
   isActive: boolean
@@ -66,6 +66,7 @@ entity User {
   createdAt: Date
   updatedAt: Date
   isDeleted: boolean
+  lastPaymentMade: Date
   role: "user" | "member" | "VIP" | "admin"
 }
 

@@ -1,9 +1,9 @@
 import {Client} from '@loopback/testlab';
-import {CapstoneProjectSetApplication} from '../..';
+import {AuthApplication} from '../..';
 import {setupApplication} from './test-helper';
 
 describe('HomePage', () => {
-  let app: CapstoneProjectSetApplication;
+  let app: AuthApplication;
   let client: Client;
 
   before('setupApplication', async () => {
