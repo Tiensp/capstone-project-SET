@@ -13,7 +13,7 @@ export class User extends Entity {
     type: 'string',
     required: true,
   })
-  fullname: string;
+  fullName: string;
 
   @property({
     type: 'string',
@@ -38,6 +38,36 @@ export class User extends Entity {
     required: true,
   })
   username: string;
+
+  @property({
+    type: 'date',
+    default: new Date(),
+  })
+  createdAt?: Date;
+
+  @property({
+    type: 'date',
+    default: new Date(),
+  })
+  updatedAt?: Date;
+
+  @property({
+    type: 'boolean',
+    default: false,
+  })
+  isDeleted?: boolean;
+
+  @property({
+    type: 'boolean',
+    default: false,
+  })
+  isActive?: boolean;
+
+  @property({
+    type: 'number',
+    default: 0,
+  })
+  payment?: number;
 
   @property({
     type: 'string',
