@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AccountConsumer, AccountProvider } from "../../stores/account";
 import routes from "../../routes";
+import { LoginPage } from "../../pages";
 
 export default function App() {
   return (
@@ -27,7 +28,7 @@ export default function App() {
               if (window.location.pathname !== routes.login.path) {
                 window.location.href = routes.login.path;
               }
-              return <div></div>;
+              return <LoginPage />;
             }
           }}
         </AccountConsumer>

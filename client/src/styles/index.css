@@ -1,12 +1,17 @@
 :root{
   --background-theme-dark: #1C1C1C;
   --background-theme-light: #DADDD8;
+}
 
+*{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
 }
 
 body {
   margin: 0;
-  background-color: var(--background-theme-light); 
+  background-color: var(--background-theme-light);
+  height: 100vh; 
 }
 
 
