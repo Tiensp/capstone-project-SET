@@ -1,10 +1,21 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AccountConsumer, AccountProvider } from "../../stores/account";
 import routes from "../../routes";
 import { LoginPage } from "../../pages";
+import WebFont from 'webfontloader';
+
 
 export default function App() {
+
+  useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ["Merriweather", "Poppins"]
+      }
+    });
+   }, []);
+  
   return (
     <Router>
       <AccountProvider>
