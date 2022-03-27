@@ -1,5 +1,7 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasMany} from '@loopback/repository';
 import { RoleEnum } from '../constant/model.enum';
+import {Cloud} from './cloud.model';
+
 @model({settings: {strict: false}})
 export class User extends Entity {
   @property({
@@ -52,6 +54,12 @@ export class User extends Entity {
   updatedAt?: Date;
 
   @property({
+    type: 'date',
+    default: new Date(),
+  })
+  lastPaymentMade?: Date;
+
+  @property({
     type: 'boolean',
     default: false,
   })
@@ -76,6 +84,9 @@ export class User extends Entity {
     }
   })
   role?: RoleEnum;
+
+  @hasMany(() => Cloud)
+  clouds: Cloud[];
   [prop: string]: any;
 
   constructor(data?: Partial<User>) {
