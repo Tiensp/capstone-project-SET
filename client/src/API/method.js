@@ -13,10 +13,11 @@ function getMethod(url, config = {}) {
 }
 
 function postMethod(url, data) {
-  return axios.post(
-    `http://${server}:${port_Server}/${url}`,
-    (data)
-  );
+  return axios.request({
+    method: "post",
+    url : `http://${server}:${port_Server}/${url}`,
+    data: (data)
+  });
 }
 
 function deleteMethod(url, data) {
@@ -31,7 +32,7 @@ function updateMethod(url, data) {
   return axios.request({
     method: "patch",
     url: `http://${server}:${port_Server}/${url}`,
-    data: JSON.stringify(data),
+    data: (data),
   });
 }
 

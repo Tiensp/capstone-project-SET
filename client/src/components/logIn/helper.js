@@ -27,8 +27,11 @@ function handleLogin(context, email, password, remember) {
         }
       })
       .catch((error) => {
-        console.log(error);
-        alert(errorMessage.login.invalid);
+        console.log(error.response);
+        if (error.response){
+          alert(error.response.data.error.message);
+        }
+        return false;
       });
     return true;
   } else {

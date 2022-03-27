@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import "../../styles/signup.css";
 import routes from "../../routes";
 import { Link } from "react-router-dom";
+import { handleSignUp } from "./helper";
+
+
 export default function Signup() {
   const [fullname, setFullname] = useState("");
   const [username, setUsername] = useState("");
@@ -63,7 +66,9 @@ export default function Signup() {
               onChange={(e) => setPhoneNumber(e.target.value)}
             ></input>
           </div>
-          <button className="signup__button signup__input">
+          <button className="signup__button signup__input"
+            onClick={(e)=> {handleSignUp(fullname, username, email, password, confirmPassword, phoneNumber)}}
+          >
             Create new account
           </button>
 
