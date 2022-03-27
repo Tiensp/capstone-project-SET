@@ -11,56 +11,71 @@ export default function Login() {
   const [isRememberMe, setRememberMe] = useState(false);
 
   return (
-    <AccountConsumer>
-      {(context) => {
-        return (
-          <div className="login__field">
-            <div className="login__title">Log in</div>
-            <div className="login__form">
-              <input
-                type="text"
-                placeholder="Enter email"
-                className="login_email login__input"
-                onChange={(e) => setUsernameInput(e.target.value)}
-                value={emailInput}
-              />
-
-              <input
-                type="password"
-                placeholder="Enter password"
-                className="login_email login__input"
-                onChange={(e) => setPasswordInput(e.target.value)}
-                onKeyPress={(e) => {
-                  if (e.key === "Enter") {
-                    handleLogin(context, emailInput, passwordInput, isRememberMe)
-                  }
-                }}
-                value={passwordInput}
-              />
-
-              <div className="login__remember">
+    <div className="login__page">
+      <AccountConsumer>
+        {(context) => {
+          return (
+            <div className="login__field">
+              <div className="login__title">Log in</div>
+              <div className="login__form">
                 <input
-                  className=" login__checkbox"
-                  type="checkbox"
-                  onClick={(e) => {
-                    setRememberMe((pre) => (pre ? false : true));
-                  }}
-                ></input>
-                <label>Remember me?</label>
-              </div>
+                  type="text"
+                  placeholder="Enter email"
+                  className="login_email login__input"
+                  onChange={(e) => setUsernameInput(e.target.value)}
+                  value={emailInput}
+                />
 
-              <button className="login__button login__input"
-                onClick={() => {handleLogin(context, emailInput, passwordInput, isRememberMe)}}
-              >
-                <span>Log in</span>
-              </button>
+                <input
+                  type="password"
+                  placeholder="Enter password"
+                  className="login_email login__input"
+                  onChange={(e) => setPasswordInput(e.target.value)}
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                      handleLogin(
+                        context,
+                        emailInput,
+                        passwordInput,
+                        isRememberMe
+                      );
+                    }
+                  }}
+                  value={passwordInput}
+                />
+
+                <div className="login__remember">
+                  <input
+                    className=" login__checkbox"
+                    type="checkbox"
+                    onClick={(e) => {
+                      setRememberMe((pre) => (pre ? false : true));
+                    }}
+                  ></input>
+                  <label>Remember me?</label>
+                </div>
+
+                <button
+                  className="login__button login__input"
+                  onClick={() => {
+                    handleLogin(
+                      context,
+                      emailInput,
+                      passwordInput,
+                      isRememberMe
+                    );
+                  }}
+                >
+                  <span>Log in</span>
+                </button>
+              </div>
+              <Link to={routes.signup.path} className="signup__link">
+                Don't have an account?
+              </Link>
             </div>
-            <Link to={routes.signup.path} className="signup__link">
-              Don't have an account?
-            </Link>
-          </div>
-        );
-      }}
-    </AccountConsumer>
+          );
+        }}
+      </AccountConsumer>
+    </div>
   );
 }
