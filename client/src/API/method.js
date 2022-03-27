@@ -1,5 +1,5 @@
 import axios from "axios";
-import { port_Server, server } from "../constant/server";
+import { port_Server, server } from "../constant/index";
 
 const method = {
   get: getMethod,
@@ -15,13 +15,13 @@ function getMethod(url, config = {}) {
 function postMethod(url, data) {
   return axios.post(
     `http://${server}:${port_Server}/${url}`,
-    JSON.stringify(data)
+    (data)
   );
 }
 
 function deleteMethod(url, data) {
   return axios.request({
-    data: JSON.stringify(data),
+    data: (data),
     method: "delete",
     url: `http://${server}:${port_Server}/${url}`,
   });

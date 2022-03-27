@@ -1,5 +1,5 @@
 import { method, URL_Request } from "../../API";
-import { errorMessage } from "../../constant/error";
+import { errorMessage } from "../../constant/index";
 
 function validate(email, password) {
   if (email && email.includes("@") && password && password.length >= 6) {
@@ -8,24 +8,27 @@ function validate(email, password) {
   return false;
 }
 
-async function handleLogin(context, email, password, remember) {
+function handleLogin(context, email, password, remember) {
   if (validate(email, password)) {
-    await method
+    method
       .post(URL_Request.login.url, {
-        email,
-        password,
+        email: email,
+        password: password,
       })
       .then((response) => {
-        if (response.token) {
-            window.sessionStorage.setItem("token", response.token);
-            if (remember) {
-                window.localStorage.setItem("token", response.token);
-            }
-            context.setAccount(response.token)
+        if (response.data && response.data.token) {
+          window.sessionStorage.setItem("token", response.data.token);
+          if (remember) {
+            window.localStorage.setItem("token", response.data.token);
+          }
+          context.setAccount(response.data.token);
+        } else {
+          alert(errorMessage.login.invalid);
         }
-        else {
-            alert(errorMessage.login.invalid);
-        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(errorMessage.login.invalid);
       });
     return true;
   } else {

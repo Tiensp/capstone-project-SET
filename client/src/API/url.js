@@ -1,6 +1,6 @@
 const URL_Request = {
     login: {
-        url: "/login"
+        url: "login"
     }
 }
 

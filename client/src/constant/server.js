@@ -1,7 +1,7 @@
-import "dotenv/config";
 
-const server = (process.env === "staging") ? "localhost" : "localhost";
 
-const port_Server = (process.env === "staging") ?  8000 : 3000;
+const server = "localhost";
+
+const port_Server = 8000;
 
 export {port_Server, server}
