@@ -2,6 +2,8 @@
 
 const server = "localhost";
 
-const port_Server = 8000;
+const port_Server = 5000;
 
-export {port_Server, server}
+const SERVER_URL = process.env.REACT_APP_SERVER_URL || `http://${server}:${port_Server}`;
+
+export {SERVER_URL}

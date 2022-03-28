@@ -4,7 +4,7 @@ import { AccountConsumer, AccountProvider } from "../../stores/account";
 import routes from "../../routes";
 import { LoginPage } from "../../pages";
 import WebFont from 'webfontloader';
-
+import { getMe } from "../../utils";
 
 export default function App() {
 
@@ -29,11 +29,7 @@ export default function App() {
                 window.sessionStorage.getItem("token") ||
                 window.localStorage.getItem("token");
               if (!context.account) {
-                const config = {
-                  headers: {
-                    authorization: token,
-                  },
-                };
+                getMe(context, token);
               }
             } else {
               if (window.location.pathname !== routes.login.path) {

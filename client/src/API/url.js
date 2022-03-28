@@ -4,8 +4,10 @@ const URL_Request = {
     },
     signup: {
         url: "signup"
+    },
+    me: {
+        url : "users/getMe"
     }
-
 }
 
 export {URL_Request}

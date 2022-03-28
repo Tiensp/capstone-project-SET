@@ -1,5 +1,5 @@
 import axios from "axios";
-import { port_Server, server } from "../constant/index";
+import { SERVER_URL} from "../constant/index";
 
 const method = {
   get: getMethod,
@@ -9,13 +9,13 @@ const method = {
 };
 
 function getMethod(url, config = {}) {
-  return axios.get(`http://${server}:${port_Server}/${url}`, config);
+  return axios.get(`${SERVER_URL}/${url}`, config);
 }
 
 function postMethod(url, data) {
   return axios.request({
     method: "post",
-    url : `http://${server}:${port_Server}/${url}`,
+    url : `${SERVER_URL}/${url}`,
     data: (data)
   });
 }
@@ -24,14 +24,14 @@ function deleteMethod(url, data) {
   return axios.request({
     data: (data),
     method: "delete",
-    url: `http://${server}:${port_Server}/${url}`,
+    url: `${SERVER_URL}/${url}`,
   });
 }
 
 function updateMethod(url, data) {
   return axios.request({
     method: "patch",
-    url: `http://${server}:${port_Server}/${url}`,
+    url: `${SERVER_URL}/${url}`,
     data: (data),
   });
 }
