@@ -1,4 +1,4 @@
-import { server , port_Server} from "./server";
+import { SERVER_URL } from "./server";
 import errorMessage from "./error";
 
-export { server , port_Server, errorMessage };
+export { SERVER_URL, errorMessage };
