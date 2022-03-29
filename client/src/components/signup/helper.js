@@ -58,7 +58,6 @@ function handleSignUp(fullname, username, email, password, confirmPassword, phon
         }
       })
       .catch((error) => {
-        console.log(error.response);
         alert(errorMessage.signup.all);
       });
     return true;
