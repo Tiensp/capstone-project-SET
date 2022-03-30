@@ -1,0 +1,80 @@
+@startuml Application use cases diagram
+skinparam actorStyle awesome
+
+entity Cloud{
+  -id: ObjectID <generated>
+  --
+  ~userId: ObjectID
+  --
+  *name: string
+  description: string
+  size: number
+  percent_memory_used: number
+  status: "Good" | "Quite Good" | "Normal" | "Quite Bad" | "Dead"
+  hasData: boolean
+  security: string,
+  firewall: string,
+  securityStatus: "Good" | "Quite Good" | "Normal" | "Quite Bad" | "None"
+  isActive: boolean
+  createdAt: Date
+  updatedAt: Date
+  isDeleted: boolean
+}
+
+entity Container{
+  -id: ObjectID <generated>
+  --
+  ~cloudId: ObjectID
+  ~imageId: ObjectID
+  --
+  *name: string
+  description: string
+  port: string
+  isActive: boolean
+  isDeleted: boolean
+  createdAt: Date
+  updatedAt: Date
+  isDeleted: boolean
+}
+
+entity Image{
+  -id: ObjectID <generated>
+  --
+  ~containerId:ObjectID
+  --
+  *name: string
+  description: string
+  size: number
+  percent_cloudMemory_used: number
+  isActive: boolean
+  createdAt: Date
+  updatedAt: Date
+  isDeleted: boolean
+}
+
+
+entity User {
+  -id: ObjectID <generated>
+  --
+  *email: string
+  *password: string
+  fullName: string
+  userName: string
+  phoneNumber: string
+  payment: number
+  isActive: boolean
+  createdAt: Date
+  updatedAt: Date
+  isDeleted: boolean
+  lastPaymentMade: Date
+  role: "user" | "member" | "VIP" | "admin"
+}
+
+Cloud ||-o{ Container
+Container ||--|| Image
+User ||-o{ Cloud
+
+
+
+
+@enduml

@@ -1,0 +1,28 @@
+version: "3" 
+#NETWORK 
+networks:  
+  my-network: 
+    driver: bridge 
+services:  
+  client: 
+    container_name: 'tnt-website' 
+    build:  
+      context: ./client
+      dockerfile: Dockerfile 
+    image: tntweb
+    restart: always 
+    ports: 
+      - 3000:3000 
+    networks: 
+      - my-network
+  server: 
+    container_name: 'tnt-api-service' 
+    build:  
+      context: ./server
+      dockerfile: Dockerfile 
+    image: tntapi
+    restart: always 
+    ports: 
+      - 8000:8000 
+    networks: 
+      - my-network
