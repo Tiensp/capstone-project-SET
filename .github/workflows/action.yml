@@ -11,7 +11,7 @@ jobs:
     - uses: actions/checkout@v1
 
     - name: Copy repository contents via scp
-      uses: Tiensp/capstone-project-SET@main
+      uses: ./.github/workflows/action
       env:
         HOST: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
@@ -22,7 +22,7 @@ jobs:
         target: "/var/www/mywebsite"
 
     - name: Executing remote command
-      uses: Tiensp/capstone-project-SET@main
+      uses: ./.github/workflows/action
       with:
         host: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
