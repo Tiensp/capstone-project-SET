@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/login.css";
 import routes from "../../routes";
 import { AccountConsumer } from "../../stores/account";
 import { handleLogin } from "./helper";
 
 export default function Login() {
+  const navigator = useNavigate()
   const [emailInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [isRememberMe, setRememberMe] = useState(false);
@@ -37,7 +38,8 @@ export default function Login() {
                         context,
                         emailInput,
                         passwordInput,
-                        isRememberMe
+                        isRememberMe,
+                        navigator
                       );
                     }
                   }}
@@ -62,7 +64,8 @@ export default function Login() {
                       context,
                       emailInput,
                       passwordInput,
-                      isRememberMe
+                      isRememberMe,
+                      navigator
                     );
                   }}
                 >

@@ -1,0 +1,8 @@
+.dashboard__container {
+    display: flex;
+}
+
+.others {
+    flex: 4;
+    background-color: white;
+}
