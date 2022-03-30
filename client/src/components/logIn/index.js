@@ -16,7 +16,7 @@ export default function Login() {
         {(context) => {
           return (
             <div className="login__field">
-              <div className="login__title">Log in</div>
+              <div className="login__title">Log in tai</div>
               <div className="login__form">
                 <input
                   type="text"
