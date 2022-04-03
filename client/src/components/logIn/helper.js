@@ -1,5 +1,6 @@
 import { method, URL_Request } from "../../API";
 import { errorMessage } from "../../constant/index";
+import routes from "../../routes";
 import { getMe } from "../../utils";
 function validate(email, password) {
   if (email && email.includes("@") && password && password.length >= 6) {
@@ -8,7 +9,7 @@ function validate(email, password) {
   return false;
 }
 
-function handleLogin(context, email, password, remember) {
+function handleLogin(context, email, password, remember, navigator) {
   if (validate(email, password)) {
     method
       .post(URL_Request.login.url, {
@@ -23,6 +24,7 @@ function handleLogin(context, email, password, remember) {
           }
           console.log(1);
           getMe(context, response.data.token);
+          navigator(routes.dashboard.path);
         } else {
           alert(errorMessage.login.invalid);
         }
