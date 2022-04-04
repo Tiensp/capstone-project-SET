@@ -47,23 +47,23 @@ jobs:
 
 
   deploy_to_digital_ocean:
-  runs-on: ubuntu-latest
-  needs: build_and_push_to_docker_hub
+    runs-on: ubuntu-latest
+    needs: build_and_push_to_docker_hub
 
 
-  strategy:
-    matrix:
-      node-version: [14.x]
+    strategy:
+      matrix:
+        node-version: [14.x]
 
-  steps:
-    - name: Deploy to Digital Ocean droplet via SSH action
-      uses: appleboy/ssh-action@v0.1.3
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.SSHKEY }}
-        envs: CONTAINER_NAME, IMAGE_NAME
-        script: |
-          docker stop $(echo $CONTAINER_NAME) && docker rm $(echo $CONTAINER_NAME)
-          docker run --name $(echo $CONTAINER_NAME) -p 9000:9000 -d $(echo $IMAGE_NAME)
+    steps:
+      - name: Deploy to Digital Ocean droplet via SSH action
+        uses: appleboy/ssh-action@v0.1.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSHKEY }}
+          envs: CONTAINER_NAME, IMAGE_NAME
+          script: |
+            docker stop $(echo $CONTAINER_NAME) && docker rm $(echo $CONTAINER_NAME)
+            docker run --name $(echo $CONTAINER_NAME) -p 9000:9000 -d $(echo $IMAGE_NAME)
 
