@@ -8,37 +8,30 @@ on:
 # Triggers the workflow on push or pull request events but only for the main branch
 
 push:
-branches: [tai/deploy]
+branches: [main]
 pull_request:
-branches: [tai/deploy]
+branches: [main]
 
-# Allows you to run this workflow manually from the Actions tab
 
 workflow_dispatch:
 
-# 
-
 env:
-  IMAGE_NAME: 'tailt1223/tnt-web'
-  CONTAINER_NAME: 'tnt-web'
+IMAGE_NAME: 'tailt1223/tnt-web'
+CONTAINER_NAME: 'tnt-web'
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 
 jobs:
 
-# This workflow contains a single job called "build"
 
-  build_and_push_to_docker_hub:
-# The type of runner that the job will run on
-  runs-on: ubuntu-latest
+build_and_push_to_docker_hub:
+runs-on: ubuntu-latest
+
 
 strategy:
   matrix:
     node-version: [14.x]
 
-# Steps represent a sequence of tasks that will be executed as part of the job
 steps:
-  # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
   - name: Checkout repository
     uses: actions/checkout@v2
 
@@ -47,7 +40,6 @@ steps:
     with:
       username: ${{ secrets.DOCKER_USERNAME }}
       password: ${{ secrets.DOCKER_PASSWORD }}
-      
   - name: Set up Docker Buildx
     uses: docker/setup-buildx-action@v1
 
@@ -61,15 +53,14 @@ steps:
 
 
 deploy_to_digital_ocean:
-# The type of runner that the job will run on
 runs-on: ubuntu-latest
 needs: build_and_push_to_docker_hub
+
 
 strategy:
   matrix:
     node-version: [14.x]
 
-# Steps represent a sequence of tasks that will be executed as part of the job
 steps:
   - name: Deploy to Digital Ocean droplet via SSH action
     uses: appleboy/ssh-action@v0.1.3
