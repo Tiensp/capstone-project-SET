@@ -8,9 +8,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-
-
-workflow_dispatch:
+  workflow_dispatch:
 
 env:
   IMAGE_NAME: 'tailt1223/tnt-web'
