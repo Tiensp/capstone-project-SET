@@ -1,73 +1,82 @@
 # This is a basic workflow to help you get started with Actions
- 
+
 name: ci
- 
+
 # Controls when the workflow will run
+
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
- 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-#
+
+# Triggers the workflow on push or pull request events but only for the main branch
+
+push:
+branches: [tai/deploy]
+pull_request:
+branches: [tai/deploy]
+
+# Allows you to run this workflow manually from the Actions tab
+
+workflow_dispatch:
+
+# 
+
 env:
-  IMAGE_NAME: 'tailt1223/tnt-web'
-  CONTAINER_NAME: 'tnt-web'
- 
+IMAGE_NAME: 'tailt1223/tnt-web'
+CONTAINER_NAME: 'tnt-web'
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
 jobs:
-  # This workflow contains a single job called "build"
-  build_and_push_to_docker_hub:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
- 
-    strategy:
-      matrix:
-        node-version: [14.x]
- 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout repository
-        uses: actions/checkout@v2
- 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
- 
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./client/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/tnt-web:latest
- 
-  deploy_to_digital_ocean:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-    needs: build_and_push_to_docker_hub
- 
-    strategy:
-      matrix:
-        node-version: [14.x]
- 
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      - name: Deploy to Digital Ocean droplet via SSH action
-        uses: appleboy/ssh-action@v0.1.3
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSHKEY }}
-          envs: CONTAINER_NAME, IMAGE_NAME
-          script: |
-            docker stop $(echo $CONTAINER_NAME) && docker rm $(echo $CONTAINER_NAME)
-            docker run --name $(echo $CONTAINER_NAME) -p 3000:3000 -d $(echo $IMAGE_NAME)
+        docker run --name $(echo $CONTAINER_NAME) -p 9000:9000 -d $(echo $IMAGE_NAME)
+        docker stop $(echo $CONTAINER_NAME) && docker rm $(echo $CONTAINER_NAME)
+      script: |
+      envs: CONTAINER_NAME, IMAGE_NAME
+      key: ${{ secrets.SSHKEY }}
+      username: ${{ secrets.USERNAME }}
+      host: ${{ secrets.HOST }}
+    with:
+    uses: appleboy/ssh-action@v0.1.3
+  - name: Deploy to Digital Ocean droplet via SSH action
+steps:
+# Steps represent a sequence of tasks that will be executed as part of the job
+
+    node-version: [14.x]
+  matrix:
+strategy:
+needs: build_and_push_to_docker_hub
+runs-on: ubuntu-latest
+
+# The type of runner that the job will run on
+deploy_to_digital_ocean:
+
+
+      tags: ${{ secrets.DOCKER_USERNAME }}/tnt-web:latest
+      push: true
+      file: ./Dockerfile
+      context: .
+    with:
+    uses: docker/build-push-action@v2
+  - name: Build and push
+
+    uses: docker/setup-buildx-action@v1
+  - name: Set up Docker Buildx
+      password: ${{ secrets.DOCKER_PASSWORD }}
+      username: ${{ secrets.DOCKER_USERNAME }}
+    with:
+    uses: docker/login-action@v1
+  - name: Login to Docker Hub
+
+    uses: actions/checkout@v2
+  - name: Checkout repository
+  # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+steps:
+
+    node-version: [14.x]
+  matrix:
+# Steps represent a sequence of tasks that will be executed as part of the job
+strategy:
+runs-on: ubuntu-latest
+# The type of runner that the job will run on
+build_and_push_to_docker_hub:
+
+
+# This workflow contains a single job called "build"
