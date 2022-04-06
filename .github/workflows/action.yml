@@ -63,5 +63,5 @@ jobs:
           envs: CONTAINER_NAME, IMAGE_NAME
           script: |
             docker stop $(echo $CONTAINER_NAME) && docker rm $(echo $CONTAINER_NAME)
-            docker run --name $(echo $CONTAINER_NAME) -p 9000:9000 -d $(echo $IMAGE_NAME)
+            docker run -it --name $(echo $CONTAINER_NAME) -p 3000:3000 -d $(echo $IMAGE_NAME)
 
