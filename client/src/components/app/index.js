@@ -5,6 +5,7 @@ import routes from "../../routes";
 import { LoginPage } from "../../pages";
 import WebFont from 'webfontloader';
 import { getMe } from "../../utils";
+import Dashboard from "../../pages/dashboard";
 
 export default function App() {
 
@@ -31,6 +32,7 @@ export default function App() {
               if (!context.account) {
                 getMe(context, token);
               }
+              return <Dashboard/>
             } else {
               if (window.location.pathname !== routes.login.path) {
                 window.location.href = routes.login.path;
