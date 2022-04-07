@@ -1,15 +1,11 @@
 import React from "react";
 import "../../styles/components/topbar.css";
 import { NotificationsNone, Settings } from "@mui/icons-material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import routes from "../../routes";
 
 export default function Topbar() {
-  const navigate = useNavigate();
-  const handleClick = () => {
-    navigate(routes.account.path);
-  };
-
+  
   return (
     <div className="topbar">
       <div className="topbar__wrapper">
@@ -29,7 +25,7 @@ export default function Topbar() {
           </div>
 
           <div>
-            <Link to={routes.account.path} onClick={handleClick}>
+            <Link to={routes.account.path} >
               <img
                 src="https://haycafe.vn/wp-content/uploads/2022/03/Avatar-hai-doc.jpg"
                 alt="avt"

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { AccountConsumer, AccountProvider } from "../../stores/account";
+import { AccountConsumer } from "../../stores/account";
 import routes from "../../routes";
 import {Pages } from "../../pages";
 import WebFont from "webfontloader";
@@ -17,8 +17,7 @@ export default function App() {
 
   return (
     <div>
-      <Pages />
-      <AccountProvider>
+      <Pages/>
         <AccountConsumer>
           {(context) => {
             if (
@@ -41,7 +40,6 @@ export default function App() {
             }
           }}
         </AccountConsumer>
-      </AccountProvider>
     </div>
   );
 }
