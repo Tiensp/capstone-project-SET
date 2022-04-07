@@ -17,7 +17,7 @@ import { authorize } from '@loopback/authorization';
 import { basicAuthorization } from '../services/basic.authorizor';
 
 
-export class UserController {
+export class AuthController {
   constructor(
     @repository(UserRepository)
     public userRepository : UserRepository,
@@ -97,7 +97,8 @@ export class UserController {
   async me(
     @inject(AuthenticationBindings.CURRENT_USER)
     currentUser: UserProfile,
-  ): Promise<UserProfile> {
-    return Promise.resolve(currentUser);
+  ): Promise<User> {
+    const user = await this.userRepository.findById(currentUser.id)
+    return _omit(user, 'password')
   }
 }

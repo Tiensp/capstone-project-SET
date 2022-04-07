@@ -5,7 +5,7 @@ export const commonRoute: {
 } = {
   signup: '/signup',
   login: '/login',
-  getMe: '/users/getMe'
+  getMe: '/auth/me'
 }
 
 export const userRoute: {
