@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "../../styles/login.css";
+import "../../styles/components/login.css";
 import routes from "../../routes";
 import { AccountConsumer } from "../../stores/account";
 import { handleLogin } from "./helper";

@@ -22,15 +22,16 @@ function handleLogin(context, email, password, remember, navigator) {
           if (remember) {
             window.localStorage.setItem("token", response.data.token);
           }
-          console.log(1);
-          getMe(context, response.data.token);
-          navigator(routes.dashboard.path);
+          getMe(context, response.data.token)
+          .then(() => {
+            console.log(context.account);
+            navigator(routes.dashboard.path);
+          })  
         } else {
           alert(errorMessage.login.invalid);
         }
       })
       .catch((error) => {
-        console.log(error.response);
         if (error.response) {
           alert(error.response.data.error.message);
         }
