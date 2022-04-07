@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { AccountConsumer } from "../../stores/account";
+import { useNavigate } from "react-router-dom";
+import { AccountConsumer, AccountProvider } from "../../stores/account";
 import routes from "../../routes";
-import {Pages } from "../../pages";
 import WebFont from "webfontloader";
 import { getMe } from "../../utils";
 
@@ -17,7 +17,7 @@ export default function App() {
 
   return (
     <div>
-      <Pages/>
+      <AccountProvider>
         <AccountConsumer>
           {(context) => {
             if (
@@ -32,14 +32,15 @@ export default function App() {
               }
               if (window.location.pathname !== routes.dashboard.path) {
                 window.location.href = routes.dashboard.path;
-             }
+              }
             } else {
               if (window.location.pathname !== routes.login.path) {
-                 window.location.href = routes.login.path;
+                window.location.href = routes.login.path; 
               }
             }
           }}
         </AccountConsumer>
+      </AccountProvider>
     </div>
   );
 }
