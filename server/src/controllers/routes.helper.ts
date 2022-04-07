@@ -1,4 +1,4 @@
-export const commonRoute: {
+export const authRoutes: {
   signup: string,
   login: string,
   getMe: string,

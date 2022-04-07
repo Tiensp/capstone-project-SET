@@ -12,10 +12,10 @@ import { BcryptHasher } from '../services/hash.password';
 import { JWTService } from '../services/jwt-service';
 import { MyUserService } from '../services/user-service';
 import { OPERATION_SECURITY_SPEC } from '../utils/security-spec';
-import { commonRoute } from './routes.helper'
+import { authRoutes } from './routes.helper'
 import { authorize } from '@loopback/authorization';
 import { basicAuthorization } from '../services/basic.authorizor';
-
+import { CredentialsRequestBody } from '../type/credential-schema';
 
 export class AuthController {
   constructor(
@@ -33,24 +33,31 @@ export class AuthController {
     public jwtService: JWTService,
   ) {}
 
-  @post(commonRoute.signup, {
+  @post(authRoutes.signup, {
     responses: {
       '200': {
-        description: 'Sign up',
-        content: {
-          schema: getJsonSchemaRef(User)
-        }
-      }
-    }
+        description: 'Sign up a new user',
+        content: {'application/json': {schema: getModelSchemaRef(User)}},
+      },
+    },
   })
-  async signup(@requestBody() userData: User) {
+  async signup(@requestBody({
+    content: {
+      'application/json': {
+        schema: getModelSchemaRef(User, {
+          title: 'NewUser',
+          exclude: ['id'],
+        }),
+      },
+    },
+  }) userData: Omit<User, 'id'>) {
     await validateCredentials(_.pick(userData, ['email', 'password']), this.userRepository);
     userData.password = await this.hasher.hashPassword(userData.password)
     const savedUser = await this.userRepository.create(userData);
     return _.omit(savedUser, 'password');
   }
 
-  @post(commonRoute.login, {
+  @post(authRoutes.login, {
     responses: {
       '200': {
         description: 'Token',
@@ -70,7 +77,7 @@ export class AuthController {
     }
   })
   async login(
-    @requestBody() credentials: Credentials,
+    @requestBody(CredentialsRequestBody) credentials: Credentials,
   ): Promise<{ token: string }> {
     const user = await this.userService.verifyCredentials(credentials);
     const userProfile = await this.userService.convertToUserProfile(user);
@@ -81,7 +88,7 @@ export class AuthController {
 
   @authenticate("jwt")
   @authorize({ allowedRoles: ['user'], voters: [basicAuthorization] })
-  @get(commonRoute.getMe, {
+  @get(authRoutes.getMe, {
     security: OPERATION_SECURITY_SPEC,
     responses: {
       '200': {
@@ -97,8 +104,8 @@ export class AuthController {
   async me(
     @inject(AuthenticationBindings.CURRENT_USER)
     currentUser: UserProfile,
-  ): Promise<User> {
+  ):  Promise<Omit<User, 'password'>> {
     const user = await this.userRepository.findById(currentUser.id)
-    return _omit(user, 'password')
+    return _.omit(user, 'password')
   }
 }
