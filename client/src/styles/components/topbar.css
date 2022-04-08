@@ -16,13 +16,11 @@
     border-bottom: 1px solid #e5e5e5;
 }
 
-.topLeft {
-
-}
 
 .topRight {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .logo {
@@ -61,4 +59,18 @@
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
+    margin-top: 5px;
+    border: 1px solid #5C5C5C;
+}
+
+
+
+.topBar__logout{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.topBarRight__element{
+    width: 20px;
 }

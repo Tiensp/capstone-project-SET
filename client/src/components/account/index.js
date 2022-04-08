@@ -53,7 +53,7 @@ export default function Account() {
                 </div>
               </div>
 
-              <div className="account__history"></div>
+              <div className="account__payment"></div>
             </div>
           )}}
         </AccountConsumer>

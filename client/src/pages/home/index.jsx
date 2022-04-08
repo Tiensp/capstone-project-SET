@@ -14,9 +14,8 @@ export default function Pages() {
       <div className="home__container">
         <Sidebar />
         <div className="home__content">
-
           <Routes>
-            <Route path={routes.home.path} element={<Dashboard />} />
+            <Route path={routes.home.path} element={<Navigate to={routes.dashboard.path} />} />
             <Route path={routes.dashboard.path} element={<Dashboard />}></Route>
             <Route path={routes.login.path} element={<Navigate to={'/'} />}></Route>
             <Route path={routes.account.path} element={<AccountPage />}></Route>
