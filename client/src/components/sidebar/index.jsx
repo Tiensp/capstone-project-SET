@@ -14,6 +14,8 @@ import {
   DynamicFeed,
 } from "@mui/icons-material";
 import "../../styles/components/sidebar.css";
+import { Link } from "react-router-dom";
+import routes from "../../routes";
 
 export default function Sidebar() {
   return (
@@ -22,10 +24,10 @@ export default function Sidebar() {
         <div className="menu">
           <h3 className="menu__title">Dashboard</h3>
           <ul className="menu__list">
-            <li className="list-item">
+            <Link className="list-item" to={routes.dashboard.path}>
               <Home className="list-item__icon" />
               Home
-            </li>
+            </Link>
 
             <li className="list-item">
               <Timeline className="list-item__icon" />

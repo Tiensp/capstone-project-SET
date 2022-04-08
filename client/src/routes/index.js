@@ -9,7 +9,7 @@ const routes = {
     path: "/signup",
   },
   account: {
-    path: "/dashboard/account",
+    path: "/account",
   },
   dashboard: {
     path: "/dashboard",

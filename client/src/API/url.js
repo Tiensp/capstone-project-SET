@@ -6,7 +6,7 @@ const URL_Request = {
         url: "signup"
     },
     me: {
-        url : "users/getMe"
+        url : "auth/me"
     }
 }
 

@@ -4,17 +4,10 @@ import "./styles/index.css";
 import App from "./components/app/index";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import { AccountProvider } from "./stores/account";
-import { Pages } from "./pages";
 
 ReactDOM.render(
   <BrowserRouter>
-    <React.StrictMode>
-      <AccountProvider>
-        <Pages />
-        <App/>
-      </AccountProvider>
-    </React.StrictMode>
+    <App />
   </BrowserRouter>,
   document.getElementById("root")
 );

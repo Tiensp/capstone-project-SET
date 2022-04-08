@@ -4,8 +4,9 @@ import { NotificationsNone, Settings } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import routes from "../../routes";
 
-export default function Topbar() {
-  
+
+export default function TopBar() {
+
   return (
     <div className="topbar">
       <div className="topbar__wrapper">
@@ -25,7 +26,7 @@ export default function Topbar() {
           </div>
 
           <div>
-            <Link to={routes.account.path} >
+            <Link to={routes.account.path}>
               <img
                 src="https://haycafe.vn/wp-content/uploads/2022/03/Avatar-hai-doc.jpg"
                 alt="avt"

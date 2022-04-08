@@ -1,7 +1,7 @@
 import { method, URL_Request } from "../../API";
 import { errorMessage } from "../../constant/index";
 import routes from "../../routes";
-import { getMe } from "../../utils";
+import { authenticate } from "../../utils";
 function validate(email, password) {
   if (email && email.includes("@") && password && password.length >= 6) {
     return true;
@@ -22,9 +22,10 @@ function handleLogin(context, email, password, remember, navigator) {
           if (remember) {
             window.localStorage.setItem("token", response.data.token);
           }
-          getMe(context, response.data.token)
+          authenticate(response.data.token).then((response) => {
+            context.setAccount(response.data);
+          })
           .then(() => {
-            console.log(context.account);
             navigator(routes.dashboard.path);
           })  
         } else {
