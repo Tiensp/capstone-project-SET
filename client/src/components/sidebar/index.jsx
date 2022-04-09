@@ -12,6 +12,7 @@ import {
   AttachMoney,
   MailOutline,
   DynamicFeed,
+  Opacity,
 } from "@mui/icons-material";
 import "../../styles/components/sidebar.css";
 import { Link } from "react-router-dom";
@@ -21,12 +22,19 @@ export default function Sidebar() {
   return (
     <div className="sidebar">
       <div className="sidebar__wrapper">
+
         <div className="menu">
           <h3 className="menu__title">Dashboard</h3>
+
           <ul className="menu__list">
             <Link className="list-item" to={routes.dashboard.path}>
               <Home className="list-item__icon" />
               Home
+            </Link>
+            
+            <Link className="list-item" to={routes.droplets.path}>
+              <Opacity className="list-item__icon" />
+              Droplets
             </Link>
 
             <li className="list-item">
@@ -78,6 +86,7 @@ export default function Sidebar() {
             </li>
           </ul>
         </div>
+
         <div className="menu">
           <h3 className="menu__title">Staff</h3>
           <ul className="menu__list">

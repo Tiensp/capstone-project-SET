@@ -4,8 +4,8 @@ import TopBar from "../../components/topbar";
 import "../../styles/pages/home.css";
 import {Routes, Route, Navigate} from "react-router-dom";
 import routes from "../../routes";
-import AccountPage from "../account";
 import  Dashboard  from "../../components/dashboard";
+import Account from "../../components/account";
 
 export default function Pages() {
   return (
@@ -17,8 +17,9 @@ export default function Pages() {
           <Routes>
             <Route path={routes.home.path} element={<Navigate to={routes.dashboard.path} />} />
             <Route path={routes.dashboard.path} element={<Dashboard />}></Route>
-            <Route path={routes.login.path} element={<Navigate to={'/'} />}></Route>
-            <Route path={routes.account.path} element={<AccountPage />}></Route>
+            <Route path={routes.login.path} element={<Navigate to={routes.home.path} />}></Route>
+            <Route path={routes.account.path} element={<Account />}></Route>
+            <Route path= {routes.droplets.path} element = {<div></div>}/>
           </Routes>
         </div>
 		

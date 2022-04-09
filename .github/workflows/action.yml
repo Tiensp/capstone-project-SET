@@ -1,7 +1,6 @@
 
-name: ci
+name: ci_FE
 
-# Controls when the workflow will run
 
 on:
   push:

@@ -9,11 +9,15 @@ const routes = {
     path: "/signup",
   },
   account: {
-    path: "/account",
+    path: "/dashboard/account",
   },
   dashboard: {
     path: "/dashboard",
   },
+  droplets :{
+    path: "/dashboard/droplets",
+  },
+
 };
 
 export default routes;

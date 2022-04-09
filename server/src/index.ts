@@ -24,6 +24,7 @@ if (require.main === module) {
       openApiSpec: {
         setServersFromRequest: true,
       },
+      setTimeout: 10000,
     },
   };
   main(config).catch(err => {

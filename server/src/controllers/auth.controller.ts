@@ -1,30 +1,55 @@
-import { Filter, FilterExcludingWhere, repository, Where } from '@loopback/repository';
-import { authenticate, AuthenticationBindings } from '@loopback/authentication';
-import { inject } from '@loopback/core';
-import { get, getJsonSchemaRef, post, param, getModelSchemaRef, requestBody, response } from '@loopback/rest';
-import { securityId, UserProfile } from '@loopback/security';
+import {
+  Filter,
+  FilterExcludingWhere,
+  repository,
+  Where,
+} from '@loopback/repository';
+import {authenticate, AuthenticationBindings} from '@loopback/authentication';
+import {inject} from '@loopback/core';
+import {
+  get,
+  getJsonSchemaRef,
+  post,
+  param,
+  getModelSchemaRef,
+  requestBody,
+  response,
+} from '@loopback/rest';
+import {securityId, UserProfile} from '@loopback/security';
 import * as _ from 'lodash';
-import { PasswordHasherBindings, TokenServiceBindings, UserServiceBindings } from '../keys';
-import { User, Container, Cloud } from '../models';
-import { Credentials, ContainerRepository, UserRepository, CloudRepository } from '../repositories';
-import { validateCredentials} from '../services';
-import { BcryptHasher } from '../services/hash.password';
-import { JWTService } from '../services/jwt-service';
-import { MyUserService } from '../services/user-service';
-import { OPERATION_SECURITY_SPEC } from '../utils/security-spec';
-import { authRoutes } from './routes.helper'
-import { authorize } from '@loopback/authorization';
-import { basicAuthorization } from '../services/basic.authorizor';
-import { CredentialsRequestBody } from '../type/credential-schema';
+import {
+  PasswordHasherBindings,
+  TokenServiceBindings,
+  UserServiceBindings,
+} from '../keys';
+import {User, Container, Cloud} from '../models';
+import {
+  Credentials,
+  ContainerRepository,
+  UserRepository,
+  CloudRepository,
+} from '../repositories';
+import {validateCredentials} from '../services';
+import {BcryptHasher} from '../services/hash.password';
+import {JWTService} from '../services/jwt-service';
+import {MyUserService} from '../services/user-service';
+import {OPERATION_SECURITY_SPEC} from '../utils/security-spec';
+import {authRoutes} from './routes.helper';
+import {authorize} from '@loopback/authorization';
+import {basicAuthorization} from '../services/basic.authorizor';
+import {CredentialsRequestBody} from '../type/credential-schema';
+import axios from 'axios';
+import {getMethod} from '../utils/api-digitalocean';
+import {resolve} from 'dns';
 
 export class AuthController {
   constructor(
     @repository(UserRepository)
-    public userRepository : UserRepository,
+    public userRepository: UserRepository,
     @repository(ContainerRepository)
-    public containerRepository : ContainerRepository,
+    public containerRepository: ContainerRepository,
     @repository(CloudRepository)
-    public cloudRepository : CloudRepository,
+    public cloudRepository: CloudRepository,
     @inject(PasswordHasherBindings.PASSWORD_HASHER)
     public hasher: BcryptHasher,
     @inject(UserServiceBindings.USER_SERVICE)
@@ -41,18 +66,24 @@ export class AuthController {
       },
     },
   })
-  async signup(@requestBody({
-    content: {
-      'application/json': {
-        schema: getModelSchemaRef(User, {
-          title: 'NewUser',
-          exclude: ['id'],
-        }),
+  async signup(
+    @requestBody({
+      content: {
+        'application/json': {
+          schema: getModelSchemaRef(User, {
+            title: 'NewUser',
+            exclude: ['id'],
+          }),
+        },
       },
-    },
-  }) userData: Omit<User, 'id'>) {
-    await validateCredentials(_.pick(userData, ['email', 'password']), this.userRepository);
-    userData.password = await this.hasher.hashPassword(userData.password)
+    })
+    userData: Omit<User, 'id'>,
+  ) {
+    await validateCredentials(
+      _.pick(userData, ['email', 'password']),
+      this.userRepository,
+    );
+    userData.password = await this.hasher.hashPassword(userData.password);
     const savedUser = await this.userRepository.create(userData);
     return _.omit(savedUser, 'password');
   }
@@ -67,27 +98,26 @@ export class AuthController {
               type: 'object',
               properties: {
                 token: {
-                  type: 'string'
-                }
-              }
-            }
-          }
-        }
-      }
-    }
+                  type: 'string',
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   })
   async login(
     @requestBody(CredentialsRequestBody) credentials: Credentials,
-  ): Promise<{ token: string }> {
+  ): Promise<{token: string}> {
     const user = await this.userService.verifyCredentials(credentials);
     const userProfile = await this.userService.convertToUserProfile(user);
     const token = await this.jwtService.generateToken(userProfile);
-    return Promise.resolve({ token: token })
+    return Promise.resolve({token});
   }
 
-
-  @authenticate("jwt")
-  @authorize({ allowedRoles: ['user'], voters: [basicAuthorization] })
+  @authenticate('jwt')
+  @authorize({allowedRoles: ['user'], voters: [basicAuthorization]})
   @get(authRoutes.getMe, {
     security: OPERATION_SECURITY_SPEC,
     responses: {
@@ -104,8 +134,8 @@ export class AuthController {
   async me(
     @inject(AuthenticationBindings.CURRENT_USER)
     currentUser: UserProfile,
-  ):  Promise<Omit<User, 'password'>> {
-    const user = await this.userRepository.findById(currentUser.id)
-    return _.omit(user, 'password')
+  ): Promise<Omit<User, 'password'>> {
+    const user = await this.userRepository.findById(currentUser.id);
+    return _.omit(user, 'password');
   }
 }

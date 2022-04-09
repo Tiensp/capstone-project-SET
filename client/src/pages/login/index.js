@@ -1,8 +1,8 @@
 import React from "react";
-import Login from "../../components/loginComponent";
+import Login from "../../components/login";
 import { Routes, Route, Navigate } from "react-router-dom";
 import routes from "../../routes";
-import SignupPage from "../signup";
+import Signup from "../../components/signup";
 
 export default function LoginPage() {
   return (
@@ -15,7 +15,7 @@ export default function LoginPage() {
           element={<Navigate to={routes.login.path}></Navigate>}
         />
         <Route path={routes.login.path + "/*"} element={<Login></Login>} />
-        <Route path={routes.signup.path} element={<SignupPage></SignupPage>} />
+        <Route path={routes.signup.path} element={<Signup></Signup>} />
       </Routes>
     </React.StrictMode>
   );
