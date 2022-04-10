@@ -6,6 +6,7 @@ import {Routes, Route, Navigate} from "react-router-dom";
 import routes from "../../routes";
 import  Dashboard  from "../../components/dashboard";
 import Account from "../../components/account";
+import Droplets from "../droplets";
 
 export default function Pages() {
   return (
@@ -19,7 +20,7 @@ export default function Pages() {
             <Route path={routes.dashboard.path} element={<Dashboard />}></Route>
             <Route path={routes.login.path} element={<Navigate to={routes.home.path} />}></Route>
             <Route path={routes.account.path} element={<Account />}></Route>
-            <Route path= {routes.droplets.path} element = {<div></div>}/>
+            <Route path= {routes.droplets.path} element = {<Droplets/>}/>
           </Routes>
         </div>
 		
