@@ -1,3 +1,3 @@
-const url_of_Digitalocean = "https://api.digitalocean.com/v2/"
+const URL_OF_DIGITALOCEAN = "https://api.digitalocean.com/v2/"
 
-export {url_of_Digitalocean}
+export {URL_OF_DIGITALOCEAN}

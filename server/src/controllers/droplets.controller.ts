@@ -19,11 +19,14 @@ import {
 } from '@loopback/rest';
 import {Droplets} from '../models';
 import {DropletsRepository} from '../repositories';
+import {URL_OF_DIGITALOCEAN} from '../constant/digitalocean-url';
+import axios from 'axios';
+require ('dotenv').config()
 
 export class DropletsController {
   constructor(
     @repository(DropletsRepository)
-    public dropletsRepository : DropletsRepository,
+    public dropletsRepository: DropletsRepository,
   ) {}
 
   @post('/droplets')
@@ -52,28 +55,32 @@ export class DropletsController {
     description: 'Droplets model count',
     content: {'application/json': {schema: CountSchema}},
   })
-  async count(
-    @param.where(Droplets) where?: Where<Droplets>,
-  ): Promise<Count> {
+  async count(@param.where(Droplets) where?: Where<Droplets>): Promise<Count> {
     return this.dropletsRepository.count(where);
   }
-
+  // fixing the issue of the following error:
   @get('/droplets')
   @response(200, {
     description: 'Array of Droplets model instances',
     content: {
       'application/json': {
         schema: {
-          type: 'array',
-          items: getModelSchemaRef(Droplets, {includeRelations: true}),
+          type: 'object',
+          items: getModelSchemaRef(Droplets),
         },
       },
     },
   })
-  async find(
-    @param.filter(Droplets) filter?: Filter<Droplets>,
-  ): Promise<Droplets[]> {
-    return this.dropletsRepository.find(filter);
+  async find(): Promise<object> {
+    let droplets= {};
+    droplets = axios.get(URL_OF_DIGITALOCEAN + "droplets", {
+      headers: {
+        Authorization: 'Bearer ' + process.env.DIGITALOCEAN_API_TOKEN,
+      },
+    }).then(res => {;
+      return res.data;
+    })
+    return Promise.resolve(droplets);
   }
 
   @patch('/droplets')
@@ -106,7 +113,8 @@ export class DropletsController {
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(Droplets, {exclude: 'where'}) filter?: FilterExcludingWhere<Droplets>
+    @param.filter(Droplets, {exclude: 'where'})
+    filter?: FilterExcludingWhere<Droplets>,
   ): Promise<Droplets> {
     return this.dropletsRepository.findById(id, filter);
   }

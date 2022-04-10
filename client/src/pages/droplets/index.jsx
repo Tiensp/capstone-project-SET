@@ -4,7 +4,7 @@ import { method } from "../../API"
 
 export default function Droplets() {
   useEffect(() => {
-
+    method("GET", "/droplets")
   })
   return (
     <div>
