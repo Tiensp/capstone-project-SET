@@ -7,6 +7,10 @@ const URL_Request = {
     },
     me: {
         url : "auth/me"
+    },
+    droplets : {
+        url : "droplets",
+        create : "droplets/create",
     }
 }
 

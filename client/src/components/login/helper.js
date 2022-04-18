@@ -18,7 +18,6 @@ function handleLogin(context, email, password, remember, navigator) {
         password: password,
       })
       .then((response) => {
-        console.log(response.data);
         if (response.data && response.data.token) {
           window.sessionStorage.setItem("token", response.data.token);
           if (remember) {

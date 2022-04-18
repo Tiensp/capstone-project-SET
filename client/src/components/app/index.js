@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { AccountConsumer, AccountProvider } from "../../stores/account";
 import WebFont from "webfontloader";
-import { authenticate, getTokenFromStorage } from "../../utils";
+import { authenticate, getTokenFromStorage, handleLogout } from "../../utils";
 import { LoginPage, Pages } from "../../pages";
 
 export default function App() {
@@ -27,7 +27,9 @@ export default function App() {
                   window.location.removeItem("token");
                   window.sessionStorage.removeItem("token");
                 }
-              });
+              }).catch((error)=> {
+                handleLogout(context);
+              })
             }
             return <Pages></Pages>;
           } else {

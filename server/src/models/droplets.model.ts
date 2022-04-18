@@ -6,68 +6,68 @@ export class Droplets extends Entity {
     type: 'string',
     id: true,
     generated: false,
-    required: true,
+    required: false,
   })
   id: string;
 
   @property({
     type: 'number',
-    required: true,
+    required: false,
   })
   memory: number;
 
   @property({
     type: 'array',
     itemType: 'string',
-    required: true,
+    required: false,
   })
   features: string[];
 
   @property({
     type: 'number',
-    required: true,
+    required: false,
   })
   disk: number;
 
   @property({
     type: 'string',
-    required: true,
+    required: false,
   })
   name: string;
 
   @property({
     type: 'object',
-    required: true,
+    required: false,
   })
   image: object;
 
   @property({
     type: 'boolean',
-    required: true,
+    required: false,
   })
   locked: boolean;
 
   @property({
     type: 'object',
-    required: true,
+    required: false,
   })
   networks: object;
 
   @property({
     type: 'object',
-    required: true,
+    required: false,
   })
   region: object;
 
   @property({
     type: 'object',
-    required: true,
+    required: false,
   })
   size: object;
 
   @property({
     type: 'string',
-    required: true,
+    required: false,
   })
   status: string;
 

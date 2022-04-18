@@ -10,7 +10,7 @@ import Droplets from "../droplets";
 
 export default function Pages() {
   return (
-    <div>
+    <React.StrictMode>
       <TopBar />
       <div className="home__container">
         <Sidebar />
@@ -25,6 +25,6 @@ export default function Pages() {
         </div>
 		
       </div>
-    </div>
+    </React.StrictMode>
   );
 }

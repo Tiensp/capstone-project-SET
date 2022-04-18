@@ -4,15 +4,11 @@ import { NotificationsNone, Logout } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import routes from "../../routes";
 import { AccountConsumer } from "../../stores/account";
+import {handleLogout} from "../../utils";
 
 export default function TopBar() {
   
-  function handleLogout(context) {
-    localStorage.removeItem("token");
-    sessionStorage.removeItem("token");
-    window.location.href = routes.login.path;
-    context.setAccount(undefined);
-  }
+  
 
   return (
     <AccountConsumer>
