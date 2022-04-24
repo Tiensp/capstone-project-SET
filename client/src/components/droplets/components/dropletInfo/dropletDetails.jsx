@@ -1,9 +1,10 @@
 import React from "react";
+import "../../../../styles/components/droplets/dropletDetails.css";
 
 export default function DropletDetails(props) {
   const { droplet } = props;
   return (
-    <div className="droplet">
+    <div className="dropletDetails">
       <div className="droplet_top">
         <div className="droplet_name">
           <h4>Name</h4>

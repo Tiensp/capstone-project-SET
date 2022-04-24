@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { method, URL_Request } from "../../../../API";
 import DropletDetails from "./dropletDetails";
+import LoadingEffect from "../../../loading";
 
 export default function DropletInfo() {
   const { id } = useParams();
@@ -14,12 +15,15 @@ export default function DropletInfo() {
     });
   }, []);
 
-  console.log(1);
-
   return (
     <div>
-      {droplet && <DropletDetails droplet={droplet} />}
+      {droplet ? (
+        <div>
+          <DropletDetails droplet={droplet} />
+        </div>
+      ) : (
+        <LoadingEffect/>
+      )}
     </div>
-
   );
 }
