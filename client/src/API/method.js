@@ -16,7 +16,7 @@ function postMethod(url, data) {
   return axios.request({
     method: "post",
     url : `${SERVER_URL}/${url}`,
-    data: (data)
+    data: (data),
   });
 }
 

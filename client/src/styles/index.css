@@ -9,10 +9,18 @@
   text-decoration: none;
 }
 
+a:visited{
+  text-decoration: none; 
+}
+
 body {
   margin: 0;
   background-color: var(--background-theme-light);
-  height: 100vh; 
+  height: 100vh;
+
 }
 
+#root{
+  height: 100vh;
+}
 

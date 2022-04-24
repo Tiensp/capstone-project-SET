@@ -14,7 +14,7 @@ export class Cloud extends Entity {
     type: 'string',
     required: true,
   })
-  namme: string;
+  name: string;
 
   @property({
     type: 'string',

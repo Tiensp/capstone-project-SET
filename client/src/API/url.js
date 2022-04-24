@@ -6,7 +6,11 @@ const URL_Request = {
         url: "signup"
     },
     me: {
-        url : "users/getMe"
+        url : "auth/me"
+    },
+    droplets : {
+        url : "droplets",
+        create : "droplets/create",
     }
 }
 

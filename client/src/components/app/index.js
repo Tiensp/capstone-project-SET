@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
-import { AccountConsumer } from "../../stores/account";
-import routes from "../../routes";
-import {Pages } from "../../pages";
+import { AccountConsumer, AccountProvider } from "../../stores/account";
 import WebFont from "webfontloader";
-import { getMe } from "../../utils";
+import { authenticate, getTokenFromStorage, handleLogout } from "../../utils";
+import { LoginPage, Pages } from "../../pages";
 
 export default function App() {
   useEffect(() => {
@@ -14,32 +13,30 @@ export default function App() {
     });
   }, []);
 
-
   return (
-    <div>
-      <Pages/>
-        <AccountConsumer>
-          {(context) => {
-            if (
-              window.sessionStorage.getItem("token") ||
-              window.localStorage.getItem("token")
-            ) {
-              const token =
-                window.sessionStorage.getItem("token") ||
-                window.localStorage.getItem("token");
-              if (!context.account) {
-                getMe(context, token);
-              }
-              if (window.location.pathname !== routes.dashboard.path) {
-                window.location.href = routes.dashboard.path;
-             }
-            } else {
-              if (window.location.pathname !== routes.login.path) {
-                 window.location.href = routes.login.path;
-              }
+    <AccountProvider>
+      <AccountConsumer>
+        {(context) => {
+          const token = getTokenFromStorage();
+          if (token && token != null) {
+            if (!context.account) {
+              authenticate(token).then((response) => {
+                if (response.status === 200) {
+                  context.setAccount(response.data);
+                } else {
+                  window.location.removeItem("token");
+                  window.sessionStorage.removeItem("token");
+                }
+              }).catch((error)=> {
+                handleLogout(context);
+              })
             }
-          }}
-        </AccountConsumer>
-    </div>
+            return <Pages></Pages>;
+          } else {
+            return <LoginPage />;
+          }
+        }}
+      </AccountConsumer>
+    </AccountProvider>
   );
 }

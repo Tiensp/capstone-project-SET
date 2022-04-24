@@ -14,6 +14,10 @@ const routes = {
   dashboard: {
     path: "/dashboard",
   },
+  droplets :{
+    path: "/dashboard/droplets",
+  },
+
 };
 
 export default routes;

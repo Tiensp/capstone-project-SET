@@ -1,3 +1,5 @@
-import { getMe } from "./getMe";
+import { authenticate } from "./authenticate";
+import { getTokenFromStorage } from "./getToken";
+import { handleLogout } from "./logout";
 
-export {getMe}
+export {authenticate, getTokenFromStorage, handleLogout}

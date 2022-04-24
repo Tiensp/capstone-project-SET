@@ -1,0 +1,14 @@
+.home__container {
+    display: flex;
+    height: 95%;
+}
+
+.home__content{
+    width: 100%;
+    padding: 40px;
+    overflow: auto;
+}
+
+.others {
+    background-color: white;
+}

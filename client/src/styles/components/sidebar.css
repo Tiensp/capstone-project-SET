@@ -9,13 +9,12 @@
 .sidebar__wrapper {
     padding: 20px;
     color: #555;
-    width: 100%;
 }
 
 .menu {
     margin-bottom: 10px;
 }
-z
+
 .menu__title {
     font-size: 13px;
     color: rgb(187, 186, 186);
@@ -32,6 +31,8 @@ z
     display: flex;
     align-items: center;
     border-radius: 6px;
+    text-decoration: none;
+    color :#555
 }
 
 .list-item.active,
@@ -42,4 +43,6 @@ z
 .list-item__icon {
     margin-right: 10px;
     font-size: 20px !important;
+    
+
 }

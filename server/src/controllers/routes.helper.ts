@@ -1,11 +1,11 @@
-export const commonRoute: {
+export const authRoutes: {
   signup: string,
   login: string,
   getMe: string,
 } = {
   signup: '/signup',
   login: '/login',
-  getMe: '/users/getMe'
+  getMe: '/auth/me'
 }
 
 export const userRoute: {
