@@ -11,6 +11,7 @@ const URL_Request = {
     droplets : {
         url : "droplets",
         create : "droplets/create",
+        
     }
 }
 

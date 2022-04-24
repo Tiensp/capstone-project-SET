@@ -2,8 +2,6 @@ import React, {useEffect, useState} from "react";
 import DropletCard from "./components/dropletCard";
 import DropletInfo from "./components/dropletInfo";
 import { method, URL_Request } from "../../API";
-import { Route, Routes } from "react-router";
-import routes from "../../routes";
 
 export default function Droplets() {
   const [droplets, setDroplets] = useState([]);
@@ -23,11 +21,6 @@ export default function Droplets() {
           })}
       </div>
 
-      <Routes>
-        <Route path = {`${routes.droplets.path}/:id`} element ></Route>
-      </Routes>
-
-      <input type="button" value="Add new Droplet"></input>
     </div>
   );
 }

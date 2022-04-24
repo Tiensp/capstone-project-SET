@@ -1,0 +1,19 @@
+.dropletCard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropletCard:hover {
+  background-color: #daddd8;
+  border-radius: 10px;
+}
+
+.dropletCard_button {
+  justify-self: flex-end;
+}
+
+.dropletCard {
+  padding: 24px;
+}

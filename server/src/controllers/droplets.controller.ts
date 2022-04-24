@@ -125,6 +125,36 @@ export class DropletsController {
       });
     return Promise.resolve(droplets);
   }
+
+  @get('/droplets/{id}')
+  @response(200, {
+    description: 'Get Droplet Information',
+    content: {
+      'application/json': {
+        schema: {
+          type: 'object',
+
+        }
+      }
+    }
+  })
+  async getDropletInfo(
+    @param.path.string('id') id: string,
+  ): Promise<object> {
+    let droplets = {};
+    droplets = axios
+      .get(URL_OF_DIGITALOCEAN + `droplets/${id}`, {
+        headers: {
+          Authorization: 'Bearer ' + process.env.DIGITALOCEAN_API_TOKEN,
+        },
+      })
+      .then(res => {
+        return res.data;
+      });
+    return Promise.resolve(droplets);
+  }
+
+  
   // @get('/droplets/count')
   // @response(200, {
   //   description: 'Droplets model count',
