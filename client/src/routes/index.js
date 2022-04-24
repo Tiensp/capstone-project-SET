@@ -16,6 +16,7 @@ const routes = {
   },
   droplets :{
     path: "/dashboard/droplets",
+    fileSystem : "/dashboard/droplets"
   },
 
 };

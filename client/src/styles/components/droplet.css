@@ -6,3 +6,21 @@
   display: block;
 }
 
+.droplet_top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.droplet:hover{
+  background-color: #DADDD8;
+}
+
+.droplet_button{
+  justify-self: flex-end;
+}
+
+.droplet{
+  padding:24px;
+  
+}

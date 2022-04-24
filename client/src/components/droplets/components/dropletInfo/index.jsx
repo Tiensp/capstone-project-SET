@@ -1,44 +1,35 @@
 import React, { useState } from "react";
-import "../../styles/components/droplet.css";
+import "../../../../styles/components/droplet.css";
+import { useParams, Link } from "react-router-dom";
 
-export default function Droplet(props) {
-  const droplet = props.droplet;
-  const [hidden, setHidden] = useState("droplet_visible");
+export default function DropletInfo() {
+  const { id } = useParams();
+  
+  const [droplet, setDroplet] = useState(undefined);
   const {
     backup_ids,
     created_at,
     disk,
     features,
-    id,
+    networks,
     image,
     kernel,
     locked,
     memory,
     name,
-    networks,
-    size,
     status,
+    size,
   } = droplet;
+
   return (
     <div className="droplet">
-      <button
-        className="droplet_button"
-        onClick={() => {
-          if (hidden === "droplet_hidden") {
-            setHidden("droplet_visible");
-          } else {
-            setHidden("droplet_hidden");
-          }
-        }}
-      >
-        x
-      </button>
-
-      <div className="droplet_name">
-        <h4>Name</h4>
-        <p> {name}</p>
+      <div className="droplet_top">
+        <div className="droplet_name">
+          <h4>Name</h4>
+          <p> {name}</p>
+        </div>
       </div>
-      <div className={hidden}>
+      <div className="dropletInfo">
         <div className="droplet_backup_id">
           <h4>Backup Ids</h4>
           {backup_ids.map((backup_id, index) => {
