@@ -16,7 +16,12 @@ const routes = {
   },
   droplets :{
     path: "/dashboard/droplets",
-    fileSystem : "/dashboard/droplets"
+    droplet : {
+      path: "/dashboard/droplets/:id",
+      fileSystem : "/dashboard/droplets/:id/fileSystem",
+      CPU: "/dashboard/droplets/:id/CPU",
+      bandwidth: "/dashboard/droplets/:id/bandwidth",
+    }
   },
 
 };

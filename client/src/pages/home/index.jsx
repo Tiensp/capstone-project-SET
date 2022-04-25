@@ -8,6 +8,7 @@ import  Dashboard  from "../../components/dashboard";
 import Account from "../../components/account";
 import DropletsPage from "../droplets";
 import { DropletInfo } from "../../components/droplets";
+import {DropletMonitorFileSystem, DropletMonitorCPU, DropletMonitorBandwidth } from "../../components/droplets/components/dropletMonitor/components";
 
 
 export default function Pages() {
@@ -23,7 +24,12 @@ export default function Pages() {
             <Route path={routes.login.path} element={<Navigate to={routes.home.path} />}></Route>
             <Route path={routes.account.path} element={<Account />}></Route>
             <Route path= {routes.droplets.path} element = {<DropletsPage/>}/>
-            <Route path= {routes.droplets.path + '/:id'} element = {<DropletInfo/>}/>
+            <Route exact path= {routes.droplets.droplet.path} element = {<DropletInfo/>}>
+              <Route index element = {<DropletMonitorFileSystem/>}/>
+              <Route path={routes.droplets.droplet.fileSystem} element={<DropletMonitorFileSystem />}/>
+              <Route path={routes.droplets.droplet.CPU} element={<DropletMonitorCPU />}/>
+              <Route path={routes.droplets.droplet.bandwidth} element={<DropletMonitorBandwidth />}/>
+            </Route>
           </Routes>
         </div>
 		

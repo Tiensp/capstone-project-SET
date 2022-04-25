@@ -1,3 +1,5 @@
-import * as DropletFileSystem from "./components/dropletFilesystem"
+import  DropletMonitorFileSystem from "./dropletMonitorFilesystem"
+import DropletMonitorCPU from "./dropletMonitorCPU"
+import DropletMonitorBandwidth from "./dropletMonitorBandwidth"
 
-export { DropletFileSystem }
+export { DropletMonitorFileSystem, DropletMonitorCPU, DropletMonitorBandwidth  }

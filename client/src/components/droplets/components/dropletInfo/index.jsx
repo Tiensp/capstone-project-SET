@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { method, URL_Request } from "../../../../API";
-import DropletDetails from "./dropletDetails";
+import "../../../../styles/components/droplets/dropletInfo.css"
+import DropletDetails from "../dropletDetails";
 import LoadingEffect from "../../../loading";
+import DropletMonitor from "../dropletMonitor";
 
 export default function DropletInfo() {
   const { id } = useParams();
@@ -10,7 +12,6 @@ export default function DropletInfo() {
 
   useEffect(() => {
     method.get(`${URL_Request.droplets.url}/${id}`).then((res) => {
-      console.log(res.data.droplet);
       setDroplet(res.data.droplet);
     });
   }, []);
@@ -18,8 +19,9 @@ export default function DropletInfo() {
   return (
     <div>
       {droplet ? (
-        <div>
+        <div className="dropletInfo">
           <DropletDetails droplet={droplet} />
+          <DropletMonitor/>
         </div>
       ) : (
         <LoadingEffect/>

@@ -1,5 +1,8 @@
 .dropletDetails{
   border: 1px solid black;
-  width: 40%;
+  width: 45%;
   padding: 10px;
+  display: block;
+  display:flex;
+  flex-direction: column;
 }

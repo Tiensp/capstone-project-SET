@@ -1,0 +1,17 @@
+.dropletMonitor{
+  border: 1px solid black;
+  width: 55%;
+  padding: 10px;
+  display: block;
+  display:flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.dropletMonitor_nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding : 0px;
+  list-style-type: none;
+}

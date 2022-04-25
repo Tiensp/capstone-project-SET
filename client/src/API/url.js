@@ -11,7 +11,9 @@ const URL_Request = {
     droplets : {
         url : "droplets",
         create : "droplets/create",
-        
+        fileSystem : (id) => {
+            return `droplets/${id}/filesystem_free`
+        }
     }
 }
 

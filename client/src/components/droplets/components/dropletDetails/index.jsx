@@ -11,7 +11,6 @@ export default function DropletDetails(props) {
           <p> {droplet.name}</p>
         </div>
       </div>
-      <div className="dropletInfo">
         <div className="droplet_backup_id">
           <h4>Backup Ids</h4>
           {Array.isArray(droplet.backup_ids) &&
@@ -117,6 +116,5 @@ export default function DropletDetails(props) {
           <p>{droplet.status}</p>
         </div>
       </div>
-    </div>
   );
 }
